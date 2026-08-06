@@ -1,5 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { AuthProvider } from '@/lib/auth';
+import { ThemeProvider } from '@/lib/theme';
 import { StoreProvider } from '@/lib/store';
 import { useRoute, matchRoute, navigate } from '@/lib/router';
 import LogoIntro from '@/components/LogoIntro';
@@ -19,6 +20,12 @@ const SearchPage = lazy(() => import('@/pages/SearchPage'));
 const WishlistPage = lazy(() => import('@/pages/WishlistPage'));
 const ComparePage = lazy(() => import('@/pages/ComparePage'));
 const AboutPage = lazy(() => import('@/pages/AboutPage'));
+const MagazinePage = lazy(() => import('@/pages/MagazinePage'));
+const FaqPage = lazy(() => import('@/pages/FaqPage'));
+const ContactPage = lazy(() => import('@/pages/ContactPage'));
+const GuidesPage = lazy(() => import('@/pages/GuidesPage'));
+const TermsPage = lazy(() => import('@/pages/TermsPage'));
+const PrivacyPage = lazy(() => import('@/pages/PrivacyPage'));
 
 function PageLoader() {
   return <SkeletonLoader />;
@@ -46,7 +53,12 @@ function Router() {
   else if (path === '/compare') page = <ComparePage />;
   else if (path === '/search') page = <SearchPage query={query.get('q') || ''} />;
   else if (path === '/about') page = <AboutPage />;
-  else if (path === '/magazine') page = <HomePage />;
+  else if (path === '/magazine') page = <MagazinePage />;
+  else if (path === '/faq') page = <FaqPage />;
+  else if (path === '/contact') page = <ContactPage />;
+  else if (path === '/guide') page = <GuidesPage />;
+  else if (path === '/terms') page = <TermsPage />;
+  else if (path === '/privacy') page = <PrivacyPage />;
   else page = <NotFound />;
 
   return (
@@ -71,13 +83,15 @@ function NotFound() {
 export default function App() {
   return (
     <AuthProvider>
-      <StoreProvider>
-        <LogoIntro />
-        <Header />
-        <Router />
-        <CartDrawer />
-        <Footer />
-      </StoreProvider>
+      <ThemeProvider>
+        <StoreProvider>
+          <LogoIntro />
+          <Header />
+          <Router />
+          <CartDrawer />
+          <Footer />
+        </StoreProvider>
+      </ThemeProvider>
     </AuthProvider>
   );
 }

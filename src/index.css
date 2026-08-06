@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* Display + body fonts */
   --font-display: 'Cormorant Garamond', 'Vazirmatn', serif;
@@ -33,6 +35,19 @@
   /* Warm neutral (background) ramp */
   --color-cream: #f5f3ee;
   --color-cream-dark: #ece9e2;
+
+  /* Night (dark mode) ramp */
+  --color-night-50: #f4f4f2;
+  --color-night-100: #e2e2dd;
+  --color-night-200: #c4c4bc;
+  --color-night-300: #9d9d92;
+  --color-night-400: #76766c;
+  --color-night-500: #5c5c54;
+  --color-night-600: #47473f;
+  --color-night-700: #34342e;
+  --color-night-800: #24241f;
+  --color-night-900: #1a1a16;
+  --color-night-950: #121210;
 
   /* Status colors */
   --color-success: #4f7d52;
@@ -139,11 +154,23 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  .dark body {
+    background-color: var(--color-night-950);
+    color: var(--color-night-50);
+    color-scheme: dark;
   }
 
   ::selection {
     background-color: var(--color-ink-900);
     color: var(--color-cream);
+  }
+
+  .dark ::selection {
+    background-color: var(--color-cta-light);
+    color: var(--color-night-50);
   }
 }
 

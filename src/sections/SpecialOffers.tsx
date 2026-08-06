@@ -28,7 +28,7 @@ export default function SpecialOffers() {
               پیشنهادها تا پایان هفته فعال هستند.
             </p>
             <div className="mt-8">
-              <Button variant="primary" className="bg-sand-400 text-ink-900 hover:bg-sand-300" onClick={() => navigate('/bestsellers')}>
+              <Button variant="primary" className="bg-sand-400 text-ink-900 dark:text-night-50 hover:bg-sand-300" onClick={() => navigate('/bestsellers')}>
                 خرید قبل از اتمام تخفیف
                 <ArrowLeft size={16} strokeWidth={1.5} />
               </Button>

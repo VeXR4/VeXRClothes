@@ -3,9 +3,9 @@ import offerImage from '@/assets/banners/offer.svg';
 import womenCat from '@/assets/categories/women.svg';
 import menCat from '@/assets/categories/men.svg';
 import shoesCat from '@/assets/categories/shoes.svg';
-import m1 from '@/assets/magazine/m1.svg';
-import m2 from '@/assets/magazine/m2.svg';
-import m3 from '@/assets/magazine/m3.svg';
+import m1 from '@/assets/magazine/m1.jpg';
+import m2 from '@/assets/magazine/m2.jpg';
+import m3 from '@/assets/magazine/m3.jpg';
 import wBlazer from '@/assets/products/w-blazer.jpg';
 import wDress from '@/assets/products/w-dress.jpg';
 import wShirt from '@/assets/products/w-shirt.jpg';
@@ -31,9 +31,9 @@ const map: Record<string, string> = {
   'categories/women.svg': womenCat,
   'categories/men.svg': menCat,
   'categories/shoes.svg': shoesCat,
-  'magazine/m1.svg': m1,
-  'magazine/m2.svg': m2,
-  'magazine/m3.svg': m3,
+  'magazine/m1.jpg': m1,
+  'magazine/m2.jpg': m2,
+  'magazine/m3.jpg': m3,
   'products/w-blazer.jpg': wBlazer,
   'products/w-dress.jpg': wDress,
   'products/w-shirt.jpg': wShirt,

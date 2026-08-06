@@ -50,8 +50,8 @@ export default function AuthPage() {
           <p className="text-xs tracking-[0.3em] text-sand-500">پوشاک وکس آر</p>
         </div>
 
-        <div className="rounded-sm border border-ink-900/10 bg-cream p-6 sm:p-8">
-          <div className="mb-6 flex border-b border-ink-900/10">
+        <div className="rounded-sm border border-ink-900/10 dark:border-night-700/40 bg-cream dark:bg-night-950 p-6 sm:p-8">
+          <div className="mb-6 flex border-b border-ink-900/10 dark:border-night-700/40">
             {([
               { id: 'login', label: 'ورود' },
               { id: 'register', label: 'ثبت‌نام' },
@@ -61,7 +61,7 @@ export default function AuthPage() {
                 key={tab.id}
                 onClick={() => { setMode(tab.id); setMsg(null); }}
                 className={`flex-1 border-b-2 py-3 text-sm font-medium transition-colors ${
-                  mode === tab.id ? 'border-ink-900 text-ink-900' : 'border-transparent text-ink-400 hover:text-ink-700'
+                  mode === tab.id ? 'border-ink-900 text-ink-900' : 'border-transparent text-ink-400 dark:text-night-400 hover:text-ink-700'
                 }`}
               >
                 {tab.label}
@@ -90,12 +90,12 @@ export default function AuthPage() {
             </Button>
           </form>
 
-          <p className="mt-5 text-center text-xs text-ink-400">
+          <p className="mt-5 text-center text-xs text-ink-400 dark:text-night-400">
             با ورود یا ثبت‌نام، شرایط استفاده از وکس آر را می‌پذیرید.
           </p>
         </div>
 
-        <button onClick={() => navigate('/')} className="mt-6 w-full text-center text-sm text-ink-500 hover:text-ink-900">
+        <button onClick={() => navigate('/')} className="mt-6 w-full text-center text-sm text-ink-500 dark:text-night-300 hover:text-ink-900 dark:text-night-50">
           بازگشت به خانه
         </button>
       </div>
@@ -110,15 +110,15 @@ function InputField({
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-xs font-medium text-ink-700">{label}</label>
+      <label className="text-xs font-medium text-ink-700 dark:text-night-200">{label}</label>
       <div className="relative">
-        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-400">{icon}</span>
+        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-400 dark:text-night-400">{icon}</span>
         <input
           type={type}
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
-          className="w-full rounded-sm border border-ink-900/15 py-2.5 pr-10 pl-3 text-sm text-ink-900 placeholder:text-ink-300 focus:border-ink-900 focus:outline-none"
+          className="w-full rounded-sm border border-ink-900/15 dark:border-night-700/40 py-2.5 pr-10 pl-3 text-sm text-ink-900 dark:text-night-50 placeholder:text-ink-300 focus:border-ink-900 focus:outline-none"
         />
       </div>
     </div>

@@ -106,6 +106,8 @@ export type Article = {
   category: string;
   image: string;
   date: string;
+  readTime?: number;
+  content?: string[];
 };
 
 export type UserProfile = {

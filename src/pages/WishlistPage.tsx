@@ -24,18 +24,18 @@ export default function WishlistPage() {
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-8">
         <div className="py-8">
           <span className="text-xs font-medium tracking-[0.3em] text-sand-500">WISHLIST</span>
-          <h1 className="mt-2 font-display text-3xl font-medium text-ink-900 sm:text-4xl">علاقه‌مندی‌ها</h1>
+          <h1 className="mt-2 font-display text-3xl font-medium text-ink-900 dark:text-night-50 sm:text-4xl">علاقه‌مندی‌ها</h1>
         </div>
 
         {loading ? (
           <div className="flex min-h-[30vh] items-center justify-center">
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-ink-900/20 border-t-ink-900" />
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-ink-900/20 dark:border-night-700/40 border-t-ink-900" />
           </div>
         ) : products.length === 0 ? (
           <div className="flex flex-col items-center justify-center gap-4 py-20">
             <Heart size={56} strokeWidth={1} className="text-ink-300" />
-            <p className="text-sm text-ink-500">هنوز محصولی به علاقه‌مندی اضافه نکرده‌اید.</p>
-            <button onClick={() => navigate('/new')} className="text-sm font-medium text-ink-900 underline underline-offset-4">
+            <p className="text-sm text-ink-500 dark:text-night-300">هنوز محصولی به علاقه‌مندی اضافه نکرده‌اید.</p>
+            <button onClick={() => navigate('/new')} className="text-sm font-medium text-ink-900 dark:text-night-50 underline underline-offset-4">
               مشاهده محصولات
             </button>
           </div>

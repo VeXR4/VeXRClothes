@@ -5,8 +5,8 @@ type LogoProps = {
 };
 
 export default function Logo({ className = '', variant = 'dark', showPersian = true }: LogoProps) {
-  const color = variant === 'dark' ? 'text-ink-900' : 'text-cream';
-  const sub = variant === 'dark' ? 'text-ink-500' : 'text-cream/60';
+  const color = variant === 'dark' ? 'text-ink-900 dark:text-night-50' : 'text-cream';
+  const sub = variant === 'dark' ? 'text-ink-500 dark:text-night-300' : 'text-cream/60';
 
   return (
     <span className={`inline-flex flex-col leading-none ${color} ${className}`}>

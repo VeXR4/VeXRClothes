@@ -16,11 +16,11 @@ const footerNav = [
   {
     title: 'راهنما',
     links: [
-      { label: 'راهنمای خرید', path: '/magazine' },
-      { label: 'سایزبندی', path: '/magazine' },
-      { label: 'ارسال و تحویل', path: '/magazine' },
-      { label: 'بازگشت کالا', path: '/magazine' },
-      { label: 'سوالات متداول', path: '/magazine' },
+      { label: 'راهنمای خرید', path: '/guide' },
+      { label: 'سایزبندی', path: '/guide?tab=size' },
+      { label: 'ارسال و تحویل', path: '/guide?tab=shipping' },
+      { label: 'بازگشت کالا', path: '/guide?tab=returns' },
+      { label: 'سوالات متداول', path: '/faq' },
     ],
   },
   {
@@ -28,9 +28,9 @@ const footerNav = [
     links: [
       { label: 'درباره ما', path: '/about' },
       { label: 'مجله', path: '/magazine' },
-      { label: 'تماس با ما', path: '/about' },
-      { label: 'فرصت‌های شغلی', path: '/about' },
-      { label: 'قوانین', path: '/about' },
+      { label: 'تماس با ما', path: '/contact' },
+      { label: 'قوانین و مقررات', path: '/terms' },
+      { label: 'حریم خصوصی', path: '/privacy' },
     ],
   },
 ];
@@ -50,7 +50,7 @@ export default function Footer() {
               placeholder="ایمیل شما"
               className="flex-1 rounded-sm border border-cream/15 bg-cream/5 px-4 py-3 text-sm text-cream placeholder:text-cream/40 focus:border-sand-400 focus:outline-none"
             />
-            <button type="submit" className="rounded-sm bg-sand-400 px-6 py-3 text-sm font-medium text-ink-900 hover:bg-sand-300 transition-colors">
+            <button type="submit" className="rounded-sm bg-sand-400 px-6 py-3 text-sm font-medium text-ink-900 dark:text-night-50 hover:bg-sand-300 transition-colors">
               عضویت
             </button>
           </form>

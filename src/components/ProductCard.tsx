@@ -91,7 +91,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
           onClick={go}
         >
           <h3
-            className="text-sm font-medium text-ink-900 line-clamp-1 cursor-pointer"
+            className="text-sm font-medium text-ink-900 line-clamp-1 cursor-pointer dark:text-night-50"
           >
             {product.name_fa || product.name}
           </h3>
@@ -99,7 +99,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
             {product.colors.slice(0, 4).map((c) => (
               <span
                 key={c}
-                className="h-3 w-3 rounded-full border border-ink-900/10"
+                className="h-3 w-3 rounded-full border border-ink-900/10 dark:border-night-700/40"
                 style={{ backgroundColor: c }}
               />
             ))}
@@ -107,15 +107,15 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         </div>
 
         {product.material && (
-          <p className="text-xs text-ink-500 line-clamp-1">{product.material}</p>
+          <p className="text-xs text-ink-500 line-clamp-1 dark:text-night-300">{product.material}</p>
         )}
 
         <div className="mt-1 flex items-baseline gap-2">
-          <span className="text-sm font-semibold text-ink-900">
+          <span className="text-sm font-semibold text-ink-900 dark:text-night-50">
             {formatPrice(product.price)} تومان
           </span>
           {product.old_price && (
-            <span className="text-xs text-ink-400 line-through">
+            <span className="text-xs text-ink-400 line-through dark:text-night-400">
               {formatPrice(product.old_price)}
             </span>
           )}

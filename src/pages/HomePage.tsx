@@ -6,6 +6,7 @@ import NewProducts from '@/sections/NewProducts';
 import BestSellers from '@/sections/BestSellers';
 import SpecialOffers from '@/sections/SpecialOffers';
 import Magazine from '@/sections/Magazine';
+import Testimonials from '@/sections/Testimonials';
 import { fetchCategories, fetchProducts } from '@/lib/api';
 import { ProductGridSkeleton } from '@/components/SkeletonLoader';
 import type { Category, Product } from '@/lib/types';
@@ -78,6 +79,7 @@ export default function HomePage() {
       {newProducts.length > 0 && <NewProducts products={newProducts} />}
       {bestSellers.length > 0 && <BestSellers products={bestSellers} />}
       <SpecialOffers />
+      <Testimonials />
       <Magazine />
     </>
   );

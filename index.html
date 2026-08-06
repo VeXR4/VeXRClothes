@@ -12,6 +12,18 @@
       rel="stylesheet"
     />
     <meta name="theme-color" content="#111111" />
+    <script>
+      // Prevent dark mode flash-of-unstyled-content: set .dark before React renders
+      (function () {
+        try {
+          var stored = localStorage.getItem('vexr-theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (stored === 'dark' || (!stored && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
     <meta property="og:type" content="website" />
     <meta property="og:title" content="VeXRClothes | پوشاک وکس آر" />
     <meta property="og:description" content="مد روزمره با اعتماد. فروشگاه آنلاین پوشاک زنانه، مردانه و کفش." />

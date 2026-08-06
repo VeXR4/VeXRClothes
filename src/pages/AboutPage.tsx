@@ -65,7 +65,7 @@ export default function AboutPage() {
   const ctaReveal = useReveal();
 
   return (
-    <div className="min-h-screen bg-cream">
+    <div className="min-h-screen bg-cream dark:bg-night-950 dark:bg-night-950">
       {/* Hero Section */}
       <section
         ref={hero.ref}
@@ -91,14 +91,14 @@ export default function AboutPage() {
         className={`reveal -mt-16 relative z-10 ${statsReveal.visible ? 'is-visible' : ''}`}
       >
         <div className="mx-auto max-w-5xl px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-4 rounded-sm bg-white p-6 shadow-xl lg:grid-cols-4 lg:gap-8 lg:p-10">
+          <div className="grid grid-cols-2 gap-4 rounded-sm bg-white dark:bg-night-900 p-6 shadow-xl lg:grid-cols-4 lg:gap-8 lg:p-10">
             {stats.map((stat) => (
               <div key={stat.label} className="flex flex-col items-center gap-2 text-center">
                 <stat.icon size={24} strokeWidth={1.5} className="text-cta" />
-                <span className="font-display text-3xl font-semibold text-ink-900 lg:text-4xl">
+                <span className="font-display text-3xl font-semibold text-ink-900 dark:text-night-50 lg:text-4xl">
                   {stat.number}
                 </span>
-                <span className="text-xs text-ink-500">{stat.label}</span>
+                <span className="text-xs text-ink-500 dark:text-night-300">{stat.label}</span>
               </div>
             ))}
           </div>
@@ -114,10 +114,10 @@ export default function AboutPage() {
           <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
             <div>
               <span className="mb-3 inline-block text-xs font-medium tracking-[0.3em] text-cta">فلسفه ما</span>
-              <h2 className="font-display text-3xl font-medium text-ink-900 lg:text-4xl">
+              <h2 className="font-display text-3xl font-medium text-ink-900 dark:text-night-50 lg:text-4xl">
                 سادگی، زیبایی، اعتماد
               </h2>
-              <div className="mt-8 space-y-5 text-base leading-7 text-ink-600">
+              <div className="mt-8 space-y-5 text-base leading-7 text-ink-600 dark:text-night-300">
                 <p>
                   وکس آر از یک باور ساده متولد شد: پوشاک باکیفیت نباید گران باشد.
                   ما می‌خواهیم هر کسی، صرف‌نظر از بودجه‌اش، بتواند استایلی شیک و مینیمال داشته باشد.
@@ -133,7 +133,7 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="relative">
-              <div className="aspect-[4/5] overflow-hidden rounded-sm bg-cream-dark">
+              <div className="aspect-[4/5] overflow-hidden rounded-sm bg-cream-dark dark:bg-night-900">
                 <img src="/assets/banners/hero.svg" alt="داستان وکس آر" className="h-full w-full object-cover" />
               </div>
               <div className="absolute -bottom-8 -left-8 rounded-sm bg-cta p-6 text-cream shadow-xl lg:-bottom-10 lg:-left-10 lg:p-8">
@@ -148,24 +148,24 @@ export default function AboutPage() {
       {/* Values Section */}
       <section
         ref={valuesReveal.ref}
-        className={`reveal bg-white py-24 lg:py-32 ${valuesReveal.visible ? 'is-visible' : ''}`}
+        className={`reveal bg-white dark:bg-night-900 py-24 lg:py-32 ${valuesReveal.visible ? 'is-visible' : ''}`}
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
             <span className="mb-3 inline-block text-xs font-medium tracking-[0.3em] text-cta">ارزش‌های ما</span>
-            <h2 className="font-display text-3xl font-medium text-ink-900 lg:text-4xl">چه چیزی ما را متفاوت می‌کند؟</h2>
+            <h2 className="font-display text-3xl font-medium text-ink-900 dark:text-night-50 lg:text-4xl">چه چیزی ما را متفاوت می‌کند؟</h2>
           </div>
           <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {values.map((value) => (
               <div
                 key={value.title}
-                className="group rounded-sm border border-ink-900/5 bg-cream p-8 transition-all duration-500 hover:border-cta/20 hover:shadow-lg"
+                className="group rounded-sm border border-ink-900/5 dark:border-night-700/30 bg-cream dark:bg-night-950 p-8 transition-all duration-500 hover:border-cta/20 hover:shadow-lg"
               >
                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-cta/10 text-cta transition-colors duration-500 group-hover:bg-cta group-hover:text-cream">
                   <value.icon size={24} strokeWidth={1.5} />
                 </div>
-                <h3 className="mt-6 text-lg font-semibold text-ink-900">{value.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-ink-600">{value.description}</p>
+                <h3 className="mt-6 text-lg font-semibold text-ink-900 dark:text-night-50">{value.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-ink-600 dark:text-night-300">{value.description}</p>
               </div>
             ))}
           </div>
@@ -180,10 +180,10 @@ export default function AboutPage() {
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <div className="text-center">
             <span className="mb-3 inline-block text-xs font-medium tracking-[0.3em] text-cta">مسیر ما</span>
-            <h2 className="font-display text-3xl font-medium text-ink-900 lg:text-4xl">از شروع تا امروز</h2>
+            <h2 className="font-display text-3xl font-medium text-ink-900 dark:text-night-50 lg:text-4xl">از شروع تا امروز</h2>
           </div>
           <div className="relative mt-16">
-            <div className="absolute left-4 top-0 h-full w-px bg-ink-900/10 lg:left-1/2 lg:-translate-x-px" />
+            <div className="absolute left-4 top-0 h-full w-px bg-ink-900/10 dark:bg-night-800/50 lg:left-1/2 lg:-translate-x-px" />
             {timeline.map((item, index) => (
               <div
                 key={item.year}
@@ -193,8 +193,8 @@ export default function AboutPage() {
                   <span className="inline-block rounded-full bg-cta px-4 py-1.5 text-xs font-semibold text-cream">
                     {item.year}
                   </span>
-                  <h3 className="mt-4 text-lg font-semibold text-ink-900">{item.title}</h3>
-                  <p className="mt-2 text-sm text-ink-600">{item.description}</p>
+                  <h3 className="mt-4 text-lg font-semibold text-ink-900 dark:text-night-50">{item.title}</h3>
+                  <p className="mt-2 text-sm text-ink-600 dark:text-night-300">{item.description}</p>
                 </div>
                 <div className="absolute left-4 h-4 w-4 -translate-x-1/2 rounded-full border-4 border-cream bg-cta lg:left-1/2" />
                 <div className="hidden flex-1 lg:block" />
@@ -207,24 +207,24 @@ export default function AboutPage() {
       {/* Team Section */}
       <section
         ref={teamReveal.ref}
-        className={`reveal bg-white py-24 lg:py-32 ${teamReveal.visible ? 'is-visible' : ''}`}
+        className={`reveal bg-white dark:bg-night-900 py-24 lg:py-32 ${teamReveal.visible ? 'is-visible' : ''}`}
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
             <span className="mb-3 inline-block text-xs font-medium tracking-[0.3em] text-cta">تیم ما</span>
-            <h2 className="font-display text-3xl font-medium text-ink-900 lg:text-4xl">آدم‌های پشت وکس آر</h2>
+            <h2 className="font-display text-3xl font-medium text-ink-900 dark:text-night-50 lg:text-4xl">آدم‌های پشت وکس آر</h2>
           </div>
           <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {team.map((member) => (
               <div key={member.name} className="group text-center">
-                <div className="relative mx-auto h-48 w-48 overflow-hidden rounded-full bg-cream-dark transition-transform duration-500 group-hover:scale-105">
+                <div className="relative mx-auto h-48 w-48 overflow-hidden rounded-full bg-cream-dark dark:bg-night-900 transition-transform duration-500 group-hover:scale-105">
                   <div className="flex h-full w-full items-center justify-center">
                     <Users size={48} strokeWidth={1} className="text-ink-300" />
                   </div>
                 </div>
-                <h3 className="mt-6 text-lg font-semibold text-ink-900">{member.name}</h3>
+                <h3 className="mt-6 text-lg font-semibold text-ink-900 dark:text-night-50">{member.name}</h3>
                 <p className="mt-1 text-sm font-medium text-cta">{member.role}</p>
-                <p className="mt-2 text-xs text-ink-500">{member.description}</p>
+                <p className="mt-2 text-xs text-ink-500 dark:text-night-300">{member.description}</p>
               </div>
             ))}
           </div>
@@ -246,7 +246,7 @@ export default function AboutPage() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a
               href="#/new"
-              className="inline-flex items-center justify-center gap-2 rounded-sm bg-cream px-8 py-3.5 text-sm font-medium text-ink-900 transition-colors hover:bg-sand-100"
+              className="inline-flex items-center justify-center gap-2 rounded-sm bg-cream dark:bg-night-950 px-8 py-3.5 text-sm font-medium text-ink-900 dark:text-night-50 transition-colors hover:bg-sand-100"
             >
               مشاهده محصولات
             </a>

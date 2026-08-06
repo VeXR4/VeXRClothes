@@ -41,8 +41,8 @@ export default function CartPage() {
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-6 pt-20">
         <ShoppingBag size={56} strokeWidth={1} className="text-ink-300" />
         <div className="text-center">
-          <h1 className="font-display text-2xl font-medium text-ink-900">سبد خرید شما خالی است</h1>
-          <p className="mt-2 text-sm text-ink-500">هنوز محصولی به سبد اضافه نکرده‌اید.</p>
+          <h1 className="font-display text-2xl font-medium text-ink-900 dark:text-night-50">سبد خرید شما خالی است</h1>
+          <p className="mt-2 text-sm text-ink-500 dark:text-night-300">هنوز محصولی به سبد اضافه نکرده‌اید.</p>
         </div>
         <Button onClick={() => navigate('/new')}>مشاهده محصولات</Button>
       </div>
@@ -52,68 +52,68 @@ export default function CartPage() {
   return (
     <div className="pt-20 lg:pt-28">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-8">
-        <h1 className="py-8 font-display text-3xl font-medium text-ink-900 sm:text-4xl">سبد خرید</h1>
+        <h1 className="py-8 font-display text-3xl font-medium text-ink-900 dark:text-night-50 sm:text-4xl">سبد خرید</h1>
 
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
           {/* Items */}
           <div className="lg:col-span-2">
-            <div className="overflow-hidden rounded-sm border border-ink-900/10">
+            <div className="overflow-hidden rounded-sm border border-ink-900/10 dark:border-night-700/40">
               {cart.map((item, i) => (
-                <div key={`${item.product.id}-${item.color}-${item.size}`} className="flex gap-4 border-b border-ink-900/5 p-4 last:border-0">
-                  <button onClick={() => navigate(`/product/${item.product.slug}`)} className="h-28 w-24 shrink-0 overflow-hidden rounded-sm bg-cream-dark">
+                <div key={`${item.product.id}-${item.color}-${item.size}`} className="flex gap-4 border-b border-ink-900/5 dark:border-night-700/30 p-4 last:border-0">
+                  <button onClick={() => navigate(`/product/${item.product.slug}`)} className="h-28 w-24 shrink-0 overflow-hidden rounded-sm bg-cream-dark dark:bg-night-900">
                     <img src={img(item.product.images[0])} alt={item.product.name_fa || item.product.name} className="h-full w-full object-cover" />
                   </button>
                   <div className="flex flex-1 flex-col gap-1">
                     <div className="flex items-start justify-between">
-                      <h3 className="text-sm font-medium text-ink-900">{item.product.name_fa || item.product.name}</h3>
-                      <button onClick={() => removeFromCart(i)} className="text-ink-400 hover:text-error" aria-label="حذف">
+                      <h3 className="text-sm font-medium text-ink-900 dark:text-night-50">{item.product.name_fa || item.product.name}</h3>
+                      <button onClick={() => removeFromCart(i)} className="text-ink-400 dark:text-night-400 hover:text-error" aria-label="حذف">
                         <Trash2 size={16} strokeWidth={1.5} />
                       </button>
                     </div>
-                    <div className="flex items-center gap-3 text-xs text-ink-500">
+                    <div className="flex items-center gap-3 text-xs text-ink-500 dark:text-night-300">
                       <span className="flex items-center gap-1">
                         رنگ:
-                        <span className="h-3 w-3 rounded-full border border-ink-900/10" style={{ backgroundColor: item.color }} />
+                        <span className="h-3 w-3 rounded-full border border-ink-900/10 dark:border-night-700/40" style={{ backgroundColor: item.color }} />
                       </span>
                       {item.size && <span>سایز: {item.size}</span>}
                     </div>
                     <div className="mt-auto flex items-center justify-between pt-2">
                       <div className="flex items-center gap-2">
-                        <button onClick={() => updateQuantity(i, item.quantity - 1)} className="flex h-8 w-8 items-center justify-center rounded-sm border border-ink-900/15 text-ink-700 hover:bg-ink-900/5">
+                        <button onClick={() => updateQuantity(i, item.quantity - 1)} className="flex h-8 w-8 items-center justify-center rounded-sm border border-ink-900/15 dark:border-night-700/40 text-ink-700 dark:text-night-200 hover:bg-ink-900/5 dark:bg-night-800/40">
                           <Minus size={14} strokeWidth={2} />
                         </button>
                         <span className="w-8 text-center text-sm">{item.quantity.toLocaleString('fa-IR')}</span>
-                        <button onClick={() => updateQuantity(i, item.quantity + 1)} className="flex h-8 w-8 items-center justify-center rounded-sm border border-ink-900/15 text-ink-700 hover:bg-ink-900/5">
+                        <button onClick={() => updateQuantity(i, item.quantity + 1)} className="flex h-8 w-8 items-center justify-center rounded-sm border border-ink-900/15 dark:border-night-700/40 text-ink-700 dark:text-night-200 hover:bg-ink-900/5 dark:bg-night-800/40">
                           <Plus size={14} strokeWidth={2} />
                         </button>
                       </div>
-                      <span className="text-sm font-semibold text-ink-900">{formatPrice(item.product.price * item.quantity)} تومان</span>
+                      <span className="text-sm font-semibold text-ink-900 dark:text-night-50">{formatPrice(item.product.price * item.quantity)} تومان</span>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-            <button onClick={clearCart} className="mt-4 flex items-center gap-2 text-xs text-ink-400 hover:text-error">
+            <button onClick={clearCart} className="mt-4 flex items-center gap-2 text-xs text-ink-400 dark:text-night-400 hover:text-error">
               <X size={14} strokeWidth={1.5} /> خالی کردن سبد
             </button>
           </div>
 
           {/* Summary */}
           <div className="lg:col-span-1">
-            <div className="sticky top-28 rounded-sm border border-ink-900/10 p-6">
-              <h2 className="text-base font-semibold text-ink-900">خلاصه سفارش</h2>
+            <div className="sticky top-28 rounded-sm border border-ink-900/10 dark:border-night-700/40 p-6">
+              <h2 className="text-base font-semibold text-ink-900 dark:text-night-50">خلاصه سفارش</h2>
 
               {/* Discount */}
               <div className="mt-5">
                 <form onSubmit={handleApply} className="flex gap-2">
                   <div className="relative flex-1">
-                    <Tag size={15} strokeWidth={1.5} className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-400" />
+                    <Tag size={15} strokeWidth={1.5} className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-400 dark:text-night-400" />
                     <input
                       type="text"
                       value={code}
                       onChange={(e) => setCode(e.target.value)}
                       placeholder="کد تخفیف"
-                      className="w-full rounded-sm border border-ink-900/15 py-2.5 pr-9 pl-3 text-sm text-ink-900 placeholder:text-ink-400 focus:border-ink-900 focus:outline-none"
+                      className="w-full rounded-sm border border-ink-900/15 dark:border-night-700/40 py-2.5 pr-9 pl-3 text-sm text-ink-900 dark:text-night-50 placeholder:text-ink-400 dark:placeholder:text-night-400 dark:text-night-400 focus:border-ink-900 focus:outline-none"
                     />
                   </div>
                   <button type="submit" disabled={applying} className="rounded-sm bg-ink-900 px-4 py-2.5 text-sm font-medium text-cream hover:bg-ink-800 disabled:opacity-50">
@@ -124,13 +124,13 @@ export default function CartPage() {
                 {discount && (
                   <div className="mt-2 flex items-center justify-between rounded-sm bg-sand-50 px-3 py-2">
                     <span className="text-xs text-sand-700">کد «{discount.code}» اعمال شد</span>
-                    <button onClick={removeDiscount} className="text-xs text-ink-400 hover:text-error">حذف</button>
+                    <button onClick={removeDiscount} className="text-xs text-ink-400 dark:text-night-400 hover:text-error">حذف</button>
                   </div>
                 )}
               </div>
 
-              <div className="mt-5 flex flex-col gap-2 border-t border-ink-900/10 pt-4 text-sm">
-                <div className="flex justify-between text-ink-600">
+              <div className="mt-5 flex flex-col gap-2 border-t border-ink-900/10 dark:border-night-700/40 pt-4 text-sm">
+                <div className="flex justify-between text-ink-600 dark:text-night-300">
                   <span>جمع کالاها</span>
                   <span>{formatPrice(itemsTotal)} تومان</span>
                 </div>
@@ -140,11 +140,11 @@ export default function CartPage() {
                     <span>- {formatPrice(discountAmount)} تومان</span>
                   </div>
                 )}
-                <div className="flex justify-between text-ink-600">
+                <div className="flex justify-between text-ink-600 dark:text-night-300">
                   <span>هزینه ارسال</span>
                   <span>{shippingCost === 0 ? 'رایگان' : `${formatPrice(shippingCost)} تومان`}</span>
                 </div>
-                <div className="flex justify-between border-t border-ink-900/10 pt-2 text-base font-semibold text-ink-900">
+                <div className="flex justify-between border-t border-ink-900/10 dark:border-night-700/40 pt-2 text-base font-semibold text-ink-900 dark:text-night-50">
                   <span>مبلغ نهایی</span>
                   <span>{formatPrice(grandTotal)} تومان</span>
                 </div>
@@ -157,7 +157,7 @@ export default function CartPage() {
                 {user ? 'ادامه به تسویه' : 'ورود و تسویه'}
                 <ArrowLeft size={16} strokeWidth={1.5} />
               </Button>
-              <button onClick={() => navigate('/new')} className="mt-3 w-full text-center text-sm text-ink-600 hover:text-ink-900">
+              <button onClick={() => navigate('/new')} className="mt-3 w-full text-center text-sm text-ink-600 dark:text-night-300 hover:text-ink-900 dark:text-night-50">
                 ادامه خرید
               </button>
             </div>

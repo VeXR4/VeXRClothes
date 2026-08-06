@@ -59,7 +59,7 @@ export default function CategoryPage({ slug }: Props) {
   if (loading) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center pt-20">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-ink-900/20 border-t-ink-900" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-ink-900/20 dark:border-night-700/40 border-t-ink-900" />
       </div>
     );
   }
@@ -67,27 +67,27 @@ export default function CategoryPage({ slug }: Props) {
   return (
     <div className="pt-20 lg:pt-28">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-8">
-        <nav className="flex items-center gap-2 py-6 text-xs text-ink-500">
-          <button onClick={() => navigate('/')} className="hover:text-ink-900">خانه</button>
+        <nav className="flex items-center gap-2 py-6 text-xs text-ink-500 dark:text-night-300">
+          <button onClick={() => navigate('/')} className="hover:text-ink-900 dark:text-night-50">خانه</button>
           <span>/</span>
-          <span className="text-ink-900">{categoryLabels[slug] || slug}</span>
+          <span className="text-ink-900 dark:text-night-50">{categoryLabels[slug] || slug}</span>
         </nav>
 
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <span className="text-xs font-medium tracking-[0.3em] text-sand-500">COLLECTION</span>
-            <h1 className="mt-2 font-display text-3xl font-medium text-ink-900 sm:text-4xl">
+            <h1 className="mt-2 font-display text-3xl font-medium text-ink-900 dark:text-night-50 sm:text-4xl">
               {categoryLabels[slug] || slug}
             </h1>
-            <p className="mt-1 text-sm text-ink-500">{sorted.length.toLocaleString('fa-IR')} محصول</p>
+            <p className="mt-1 text-sm text-ink-500 dark:text-night-300">{sorted.length.toLocaleString('fa-IR')} محصول</p>
           </div>
 
           <div className="flex items-center gap-2">
-            <SlidersHorizontal size={16} strokeWidth={1.5} className="text-ink-500" />
+            <SlidersHorizontal size={16} strokeWidth={1.5} className="text-ink-500 dark:text-night-300" />
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value as typeof sort)}
-              className="rounded-sm border border-ink-900/15 px-3 py-2 text-sm text-ink-900 focus:border-ink-900 focus:outline-none"
+              className="rounded-sm border border-ink-900/15 dark:border-night-700/40 px-3 py-2 text-sm text-ink-900 dark:text-night-50 focus:border-ink-900 focus:outline-none"
             >
               <option value="default">مرتب‌سازی پیش‌فرض</option>
               <option value="low">ارزان‌ترین</option>
@@ -101,7 +101,7 @@ export default function CategoryPage({ slug }: Props) {
             <button
               onClick={() => setActiveSub('')}
               className={`rounded-full px-4 py-2 text-sm transition-colors ${
-                !activeSub ? 'bg-ink-900 text-cream' : 'border border-ink-900/15 text-ink-700 hover:border-ink-900'
+                !activeSub ? 'bg-ink-900 text-cream' : 'border border-ink-900/15 dark:border-night-700/40 text-ink-700 dark:text-night-200 hover:border-ink-900'
               }`}
             >
               همه
@@ -111,7 +111,7 @@ export default function CategoryPage({ slug }: Props) {
                 key={sc.id}
                 onClick={() => setActiveSub(sc.slug)}
                 className={`rounded-full px-4 py-2 text-sm transition-colors ${
-                  activeSub === sc.slug ? 'bg-ink-900 text-cream' : 'border border-ink-900/15 text-ink-700 hover:border-ink-900'
+                  activeSub === sc.slug ? 'bg-ink-900 text-cream' : 'border border-ink-900/15 dark:border-night-700/40 text-ink-700 dark:text-night-200 hover:border-ink-900'
                 }`}
               >
                 {sc.name}
@@ -122,8 +122,8 @@ export default function CategoryPage({ slug }: Props) {
 
         {sorted.length === 0 ? (
           <div className="flex flex-col items-center justify-center gap-4 py-20">
-            <p className="text-sm text-ink-500">محصولی در این دسته یافت نشد.</p>
-            <button onClick={() => navigate('/')} className="text-sm font-medium text-ink-900 underline underline-offset-4">
+            <p className="text-sm text-ink-500 dark:text-night-300">محصولی در این دسته یافت نشد.</p>
+            <button onClick={() => navigate('/')} className="text-sm font-medium text-ink-900 dark:text-night-50 underline underline-offset-4">
               بازگشت به خانه
             </button>
           </div>

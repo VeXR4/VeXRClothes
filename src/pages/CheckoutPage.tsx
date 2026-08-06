@@ -61,7 +61,7 @@ export default function CheckoutPage() {
   if (cart.length === 0 && !done) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 pt-20">
-        <p className="text-sm text-ink-500">سبد خرید شما خالی است.</p>
+        <p className="text-sm text-ink-500 dark:text-night-300">سبد خرید شما خالی است.</p>
         <Button onClick={() => navigate('/new')}>مشاهده محصولات</Button>
       </div>
     );
@@ -74,9 +74,9 @@ export default function CheckoutPage() {
           <Check size={32} strokeWidth={2} />
         </div>
         <div className="text-center">
-          <h1 className="font-display text-3xl font-medium text-ink-900">سفارش ثبت شد</h1>
-          <p className="mt-2 text-sm text-ink-500">شماره سفارش: {done.id.slice(0, 8)}</p>
-          <p className="mt-1 text-sm text-ink-500">مبلغ پرداختی: {formatPrice(done.grand_total)} تومان</p>
+          <h1 className="font-display text-3xl font-medium text-ink-900 dark:text-night-50">سفارش ثبت شد</h1>
+          <p className="mt-2 text-sm text-ink-500 dark:text-night-300">شماره سفارش: {done.id.slice(0, 8)}</p>
+          <p className="mt-1 text-sm text-ink-500 dark:text-night-300">مبلغ پرداختی: {formatPrice(done.grand_total)} تومان</p>
         </div>
         <Button onClick={() => navigate('/account')}>مشاهده سفارش‌ها</Button>
       </div>
@@ -134,25 +134,25 @@ export default function CheckoutPage() {
   return (
     <div className="pt-20 lg:pt-28">
       <div className="mx-auto max-w-4xl px-6 sm:px-8 lg:px-8">
-        <h1 className="py-8 font-display text-3xl font-medium text-ink-900 sm:text-4xl">تسویه حساب</h1>
+        <h1 className="py-8 font-display text-3xl font-medium text-ink-900 dark:text-night-50 sm:text-4xl">تسویه حساب</h1>
 
         {/* Stepper */}
         <div className="mb-8 flex items-center gap-2">
           {steps.map((s, i) => (
             <div key={s} className="flex flex-1 items-center gap-2">
-              <div className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium ${i <= step ? 'bg-ink-900 text-cream' : 'bg-ink-900/10 text-ink-400'}`}>
+              <div className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium ${i <= step ? 'bg-ink-900 text-cream' : 'bg-ink-900/10 dark:bg-night-800/50 text-ink-400'}`}>
                 {(i + 1).toLocaleString('fa-IR')}
               </div>
-              <span className={`text-xs ${i <= step ? 'text-ink-900 font-medium' : 'text-ink-400'}`}>{s}</span>
-              {i < steps.length - 1 && <div className={`h-px flex-1 ${i < step ? 'bg-ink-900' : 'bg-ink-900/10'}`} />}
+              <span className={`text-xs ${i <= step ? 'text-ink-900 dark:text-night-50 font-medium' : 'text-ink-400'}`}>{s}</span>
+              {i < steps.length - 1 && <div className={`h-px flex-1 ${i < step ? 'bg-ink-900' : 'bg-ink-900/10 dark:bg-night-800/50'}`} />}
             </div>
           ))}
         </div>
 
         {/* Step 0: Customer */}
         {step === 0 && (
-          <div className="space-y-4 rounded-sm border border-ink-900/10 p-6">
-            <div className="flex items-center gap-2 text-sm font-semibold text-ink-900">
+          <div className="space-y-4 rounded-sm border border-ink-900/10 dark:border-night-700/40 p-6">
+            <div className="flex items-center gap-2 text-sm font-semibold text-ink-900 dark:text-night-50">
               <User size={18} strokeWidth={1.5} /> اطلاعات تماس
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -165,8 +165,8 @@ export default function CheckoutPage() {
 
         {/* Step 1: Shipping */}
         {step === 1 && (
-          <div className="space-y-4 rounded-sm border border-ink-900/10 p-6">
-            <div className="flex items-center gap-2 text-sm font-semibold text-ink-900">
+          <div className="space-y-4 rounded-sm border border-ink-900/10 dark:border-night-700/40 p-6">
+            <div className="flex items-center gap-2 text-sm font-semibold text-ink-900 dark:text-night-50">
               <MapPin size={18} strokeWidth={1.5} /> آدرس ارسال
             </div>
             {addresses.length > 0 && (
@@ -178,7 +178,7 @@ export default function CheckoutPage() {
                       setSelectedAddr(a.id);
                       setShipping({ ...shipping, address: a.address, city: a.city, postal_code: a.postal_code || '' });
                     }}
-                    className={`rounded-sm border px-3 py-2 text-xs ${selectedAddr === a.id ? 'border-ink-900 bg-ink-900 text-cream' : 'border-ink-900/15 text-ink-700'}`}
+                    className={`rounded-sm border px-3 py-2 text-xs ${selectedAddr === a.id ? 'border-ink-900 bg-ink-900 text-cream' : 'border-ink-900/15 dark:border-night-700/40 text-ink-700'}`}
                   >
                     {a.label} - {a.city}
                   </button>
@@ -196,8 +196,8 @@ export default function CheckoutPage() {
 
         {/* Step 2: Payment */}
         {step === 2 && (
-          <div className="space-y-4 rounded-sm border border-ink-900/10 p-6">
-            <div className="flex items-center gap-2 text-sm font-semibold text-ink-900">
+          <div className="space-y-4 rounded-sm border border-ink-900/10 dark:border-night-700/40 p-6">
+            <div className="flex items-center gap-2 text-sm font-semibold text-ink-900 dark:text-night-50">
               <CreditCard size={18} strokeWidth={1.5} /> روش پرداخت
             </div>
             <div className="space-y-3">
@@ -208,52 +208,52 @@ export default function CheckoutPage() {
                 <button
                   key={m.id}
                   onClick={() => setPayment(m.id)}
-                  className={`flex w-full items-center gap-3 rounded-sm border p-4 text-right transition-all ${payment === m.id ? 'border-ink-900 bg-ink-900/5' : 'border-ink-900/15'}`}
+                  className={`flex w-full items-center gap-3 rounded-sm border p-4 text-right transition-all ${payment === m.id ? 'border-ink-900 bg-ink-900/5 dark:bg-night-800/40' : 'border-ink-900/15 dark:border-night-700/40'}`}
                 >
                   <div className={`flex h-5 w-5 items-center justify-center rounded-full border-2 ${payment === m.id ? 'border-ink-900' : 'border-ink-300'}`}>
                     {payment === m.id && <div className="h-2.5 w-2.5 rounded-full bg-ink-900" />}
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-ink-900">{m.label}</p>
-                    <p className="text-xs text-ink-500">{m.desc}</p>
+                    <p className="text-sm font-medium text-ink-900 dark:text-night-50">{m.label}</p>
+                    <p className="text-xs text-ink-500 dark:text-night-300">{m.desc}</p>
                   </div>
                 </button>
               ))}
             </div>
-            <p className="text-xs text-ink-400">درگاه پرداخت واقعی در مرحله بعد فعال خواهد شد. این مرحله آزمایشی است.</p>
+            <p className="text-xs text-ink-400 dark:text-night-400">درگاه پرداخت واقعی در مرحله بعد فعال خواهد شد. این مرحله آزمایشی است.</p>
           </div>
         )}
 
         {/* Order summary */}
-        <div className="mt-6 rounded-sm border border-ink-900/10 p-6">
-          <h3 className="text-sm font-semibold text-ink-900">خلاصه سفارش</h3>
+        <div className="mt-6 rounded-sm border border-ink-900/10 dark:border-night-700/40 p-6">
+          <h3 className="text-sm font-semibold text-ink-900 dark:text-night-50">خلاصه سفارش</h3>
           <div className="mt-3 space-y-2">
             {cart.map((item) => (
               <div key={`${item.product.id}-${item.color}-${item.size}`} className="flex items-center gap-3 text-xs">
-                <div className="h-12 w-10 shrink-0 overflow-hidden rounded-sm bg-cream-dark">
+                <div className="h-12 w-10 shrink-0 overflow-hidden rounded-sm bg-cream-dark dark:bg-night-900">
                   <img src={img(item.product.images[0])} alt="" className="h-full w-full object-cover" />
                 </div>
-                <span className="flex-1 text-ink-700">{item.product.name_fa || item.product.name} × {item.quantity.toLocaleString('fa-IR')}</span>
-                <span className="text-ink-600">{formatPrice(item.product.price * item.quantity)}</span>
+                <span className="flex-1 text-ink-700 dark:text-night-200">{item.product.name_fa || item.product.name} × {item.quantity.toLocaleString('fa-IR')}</span>
+                <span className="text-ink-600 dark:text-night-300">{formatPrice(item.product.price * item.quantity)}</span>
               </div>
             ))}
           </div>
-          <div className="mt-4 space-y-1 border-t border-ink-900/10 pt-3 text-sm">
-            <div className="flex justify-between text-ink-600"><span>جمع کالاها</span><span>{formatPrice(itemsTotal)} تومان</span></div>
+          <div className="mt-4 space-y-1 border-t border-ink-900/10 dark:border-night-700/40 pt-3 text-sm">
+            <div className="flex justify-between text-ink-600 dark:text-night-300"><span>جمع کالاها</span><span>{formatPrice(itemsTotal)} تومان</span></div>
             {discountAmount > 0 && <div className="flex justify-between text-success"><span>تخفیف</span><span>- {formatPrice(discountAmount)} تومان</span></div>}
-            <div className="flex justify-between text-ink-600"><span>ارسال</span><span>{shippingCost === 0 ? 'رایگان' : `${formatPrice(shippingCost)} تومان`}</span></div>
-            <div className="flex justify-between border-t border-ink-900/10 pt-2 font-semibold text-ink-900"><span>مبلغ نهایی</span><span>{formatPrice(grandTotal)} تومان</span></div>
+            <div className="flex justify-between text-ink-600 dark:text-night-300"><span>ارسال</span><span>{shippingCost === 0 ? 'رایگان' : `${formatPrice(shippingCost)} تومان`}</span></div>
+            <div className="flex justify-between border-t border-ink-900/10 dark:border-night-700/40 pt-2 font-semibold text-ink-900 dark:text-night-50"><span>مبلغ نهایی</span><span>{formatPrice(grandTotal)} تومان</span></div>
           </div>
         </div>
 
         {/* Nav buttons */}
         <div className="mt-6 flex items-center justify-between">
           {step > 0 ? (
-            <button onClick={() => setStep(step - 1)} className="flex items-center gap-1 text-sm text-ink-600 hover:text-ink-900">
+            <button onClick={() => setStep(step - 1)} className="flex items-center gap-1 text-sm text-ink-600 dark:text-night-300 hover:text-ink-900 dark:text-night-50">
               <ChevronLeft size={16} strokeWidth={1.5} /> مرحله قبل
             </button>
           ) : (
-            <button onClick={() => navigate('/cart')} className="text-sm text-ink-600 hover:text-ink-900">بازگشت به سبد</button>
+            <button onClick={() => navigate('/cart')} className="text-sm text-ink-600 dark:text-night-300 hover:text-ink-900 dark:text-night-50">بازگشت به سبد</button>
           )}
           <Button onClick={handleNext} disabled={!canNext() || submitting}>
             {submitting ? 'در حال ثبت...' : step === 2 ? 'ثبت سفارش' : 'مرحله بعد'}
@@ -267,20 +267,20 @@ export default function CheckoutPage() {
 function Field({ label, value, onChange, textarea }: { label: string; value: string; onChange: (v: string) => void; textarea?: boolean }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-xs font-medium text-ink-700">{label}</label>
+      <label className="text-xs font-medium text-ink-700 dark:text-night-200">{label}</label>
       {textarea ? (
         <textarea
           value={value}
           onChange={(e) => onChange(e.target.value)}
           rows={3}
-          className="rounded-sm border border-ink-900/15 px-3 py-2.5 text-sm text-ink-900 focus:border-ink-900 focus:outline-none"
+          className="rounded-sm border border-ink-900/15 dark:border-night-700/40 px-3 py-2.5 text-sm text-ink-900 dark:text-night-50 focus:border-ink-900 focus:outline-none"
         />
       ) : (
         <input
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="rounded-sm border border-ink-900/15 px-3 py-2.5 text-sm text-ink-900 focus:border-ink-900 focus:outline-none"
+          className="rounded-sm border border-ink-900/15 dark:border-night-700/40 px-3 py-2.5 text-sm text-ink-900 dark:text-night-50 focus:border-ink-900 focus:outline-none"
         />
       )}
     </div>

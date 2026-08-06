@@ -1,0 +1,14 @@
+# Cache static assets
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# No cache for HTML
+/index.html
+  Cache-Control: no-cache
+
+# Security headers
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin

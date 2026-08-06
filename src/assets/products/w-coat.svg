@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <rect width="800" height="1000" fill="#FAF9F6"/>
+  
+      <path d="M280 300 L220 380 L220 760 L380 760 L380 420 L420 420 L420 760 L580 760 L580 380 L520 300 L460 340 L400 300 L340 340 Z" fill="#1f1f1f" opacity="0.92"/>
+      <line x1="400" y1="300" x2="400" y2="420" stroke="#C8A97E" stroke-width="4" opacity="0.7"/>
+    
+  <text x="400" y="940" text-anchor="middle" font-family="serif" font-size="28" fill="#1f1f1f" opacity="0.7" font-weight="500">پالتو چارکول</text>
+  <text x="400" y="970" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#1f1f1f" opacity="0.4">Women · Coat</text>
+</svg>

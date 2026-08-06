@@ -7,6 +7,7 @@ import BestSellers from '@/sections/BestSellers';
 import SpecialOffers from '@/sections/SpecialOffers';
 import Magazine from '@/sections/Magazine';
 import { fetchCategories, fetchProducts } from '@/lib/api';
+import { ProductGridSkeleton } from '@/components/SkeletonLoader';
 import type { Category, Product } from '@/lib/types';
 
 const marqueeItems = [
@@ -62,8 +63,8 @@ export default function HomePage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-[60vh] items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-ink-900/20 border-t-ink-900" />
+      <div className="pt-20">
+        <ProductGridSkeleton count={8} />
       </div>
     );
   }

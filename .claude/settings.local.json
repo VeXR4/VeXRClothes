@@ -6,7 +6,8 @@
       "Bash(git add *)",
       "Bash(git commit -m 'Fix Cloudflare Pages deployment error *)",
       "Bash(git push *)",
-      "WebFetch(domain:vexrclothes.vexrband.workers.dev)"
+      "WebFetch(domain:vexrclothes.vexrband.workers.dev)",
+      "Bash(git commit -m 'Add luxury navy blue CTA color and enhance UI *)"
     ]
   }
 }

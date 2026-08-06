@@ -19,17 +19,27 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
   const go = () => navigate(`/product/${product.slug}`);
 
   return (
-    <article className="group flex flex-col">
+    <article className="group flex flex-col" aria-label={product.name_fa || product.name}>
       <div
-        className="relative cursor-pointer overflow-hidden rounded-sm bg-cream-dark"
+        className="relative overflow-hidden rounded-sm transition-shadow duration-500 group-hover:shadow-lg"
+        style={{ cursor: 'pointer' }}
+        role="link"
+        tabIndex={0}
+        aria-label={`مشاهده ${product.name_fa || product.name}`}
         onClick={go}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            go();
+          }
+        }}
       >
         <div className="aspect-[3/4] w-full overflow-hidden">
           <img
             src={img(product.images[0])}
             alt={product.name_fa || product.name}
             loading={priority ? 'eager' : 'lazy'}
-            className="h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-soft)] group-hover:scale-105"
+            className="h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-soft)] group-hover:scale-110"
           />
         </div>
 

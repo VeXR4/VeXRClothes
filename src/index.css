@@ -51,6 +51,9 @@
   --animate-fade-up: fade-up 0.8s var(--ease-soft) both;
   --animate-fade-in: fade-in 0.6s var(--ease-soft) both;
   --animate-marquee: marquee 32s linear infinite;
+  --animate-scale-in: scale-in 0.5s var(--ease-soft) both;
+  --animate-fade-in-blur: fade-in-blur 0.8s var(--ease-soft) both;
+  --animate-float: float 6s ease-in-out infinite;
 }
 
 @keyframes fade-up {
@@ -79,6 +82,49 @@
   }
   to {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in-blur {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes shine {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
   }
 }
 
@@ -126,5 +172,16 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }

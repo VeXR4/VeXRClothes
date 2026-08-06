@@ -35,6 +35,17 @@ export default function Header() {
     };
   }, [mobileOpen]);
 
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMobileOpen(false);
+        setSearchOpen(false);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
   const go = (path: string) => {
     setMobileOpen(false);
     navigate(path);
@@ -159,6 +170,9 @@ export default function Header() {
 
       {/* Mobile drawer */}
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="منوی موبایل"
         className={`lg:hidden fixed inset-0 z-50 transition-opacity duration-300 ${
           mobileOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
         }`}

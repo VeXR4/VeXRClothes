@@ -1,3 +1,4 @@
+import { Suspense, lazy } from 'react';
 import { AuthProvider } from '@/lib/auth';
 import { StoreProvider } from '@/lib/store';
 import { useRoute, matchRoute, navigate } from '@/lib/router';
@@ -5,17 +6,23 @@ import LogoIntro from '@/components/LogoIntro';
 import Header from '@/components/Header';
 import CartDrawer from '@/components/CartDrawer';
 import Footer from '@/sections/Footer';
+import { SkeletonLoader } from '@/components/SkeletonLoader';
 import HomePage from '@/pages/HomePage';
-import ProductPage from '@/pages/ProductPage';
-import CartPage from '@/pages/CartPage';
-import CheckoutPage from '@/pages/CheckoutPage';
-import AuthPage from '@/pages/AuthPage';
-import AccountPage from '@/pages/AccountPage';
-import CategoryPage from '@/pages/CategoryPage';
-import SearchPage from '@/pages/SearchPage';
-import WishlistPage from '@/pages/WishlistPage';
-import ComparePage from '@/pages/ComparePage';
-import AboutPage from '@/pages/AboutPage';
+
+const ProductPage = lazy(() => import('@/pages/ProductPage'));
+const CartPage = lazy(() => import('@/pages/CartPage'));
+const CheckoutPage = lazy(() => import('@/pages/CheckoutPage'));
+const AuthPage = lazy(() => import('@/pages/AuthPage'));
+const AccountPage = lazy(() => import('@/pages/AccountPage'));
+const CategoryPage = lazy(() => import('@/pages/CategoryPage'));
+const SearchPage = lazy(() => import('@/pages/SearchPage'));
+const WishlistPage = lazy(() => import('@/pages/WishlistPage'));
+const ComparePage = lazy(() => import('@/pages/ComparePage'));
+const AboutPage = lazy(() => import('@/pages/AboutPage'));
+
+function PageLoader() {
+  return <SkeletonLoader />;
+}
 
 function Router() {
   const route = useRoute();
@@ -42,7 +49,11 @@ function Router() {
   else if (path === '/magazine') page = <HomePage />;
   else page = <NotFound />;
 
-  return <main className="min-h-screen">{page}</main>;
+  return (
+    <main className="min-h-screen">
+      <Suspense fallback={<PageLoader />}>{page}</Suspense>
+    </main>
+  );
 }
 
 function NotFound() {

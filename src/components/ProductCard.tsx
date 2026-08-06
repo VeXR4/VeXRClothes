@@ -20,7 +20,10 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
 
   return (
     <article className="group flex flex-col">
-      <div className="relative overflow-hidden rounded-sm bg-cream-dark">
+      <div
+        className="relative cursor-pointer overflow-hidden rounded-sm bg-cream-dark"
+        onClick={go}
+      >
         <div className="aspect-[3/4] w-full overflow-hidden">
           <img
             src={img(product.images[0])}
@@ -43,7 +46,10 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         )}
 
         <button
-          onClick={() => toggleWishlist(product.id)}
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleWishlist(product.id);
+          }}
           className="absolute left-3 bottom-3 flex h-9 w-9 items-center justify-center rounded-full bg-cream/90 text-ink-700 backdrop-blur-sm transition-colors hover:text-error"
           aria-label="افزودن به علاقه‌مندی"
         >
@@ -55,9 +61,12 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
           />
         </button>
 
-        <div className="absolute inset-x-0 bottom-0 translate-y-full opacity-0 transition-all duration-500 ease-[var(--ease-soft)] group-hover:translate-y-0 group-hover:opacity-100">
+        <div className="absolute inset-x-0 bottom-0 hidden translate-y-full opacity-0 transition-all duration-500 ease-[var(--ease-soft)] group-hover:translate-y-0 group-hover:opacity-100 lg:block">
           <button
-            onClick={go}
+            onClick={(e) => {
+              e.stopPropagation();
+              go();
+            }}
             className="flex w-full items-center justify-center gap-2 bg-ink-900/95 py-3.5 text-sm font-medium text-cream backdrop-blur-sm hover:bg-ink-900"
           >
             <Eye size={16} strokeWidth={1.5} />
@@ -67,8 +76,13 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
       </div>
 
       <div className="mt-4 flex flex-col gap-1.5">
-        <div className="flex items-center justify-between gap-2">
-          <h3 className="text-sm font-medium text-ink-900 line-clamp-1">
+        <div
+          className="flex items-center justify-between gap-2"
+          onClick={go}
+        >
+          <h3
+            className="text-sm font-medium text-ink-900 line-clamp-1 cursor-pointer"
+          >
             {product.name_fa || product.name}
           </h3>
           <div className="flex gap-1.5">

@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
-  <rect width="800" height="1000" fill="#FAF9F6"/>
-  
-      <path d="M300 300 L260 300 L240 760 L380 760 L400 460 L420 760 L560 760 L540 300 L500 300 Z" fill="#2a3a4a" opacity="0.92"/>
-      <rect x="395" y="300" width="10" height="460" fill="#C8A97E" opacity="0.5"/>
-    
-  <text x="400" y="940" text-anchor="middle" font-family="serif" font-size="28" fill="#2a3a4a" opacity="0.7" font-weight="500">شلوار جین</text>
-  <text x="400" y="970" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#2a3a4a" opacity="0.4">Men · Pants</text>
-</svg>

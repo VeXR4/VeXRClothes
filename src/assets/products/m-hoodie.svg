@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
-  <rect width="800" height="1000" fill="#FAF9F6"/>
-  
-      <path d="M270 360 L230 420 L230 760 L570 760 L570 420 L530 360 L470 380 L400 300 L330 380 Z" fill="#2a2a2a" opacity="0.92"/>
-      <path d="M330 300 Q400 240 470 300 L470 360 Q400 320 330 360 Z" fill="#C8A97E" opacity="0.7"/>
-    
-  <text x="400" y="940" text-anchor="middle" font-family="serif" font-size="28" fill="#2a2a2a" opacity="0.7" font-weight="500">هودی چارکول</text>
-  <text x="400" y="970" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#2a2a2a" opacity="0.4">Men · Hoodie</text>
-</svg>

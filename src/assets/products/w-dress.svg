@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
-  <rect width="800" height="1000" fill="#FAF9F6"/>
-  
-      <path d="M320 300 L260 380 L240 760 L560 760 L540 380 L480 300 L440 340 L400 360 L360 340 Z" fill="#2a2a2a" opacity="0.92"/>
-      <path d="M320 300 L400 360 L480 300 L460 260 L340 260 Z" fill="#C8A97E" opacity="0.8"/>
-    
-  <text x="400" y="940" text-anchor="middle" font-family="serif" font-size="28" fill="#2a2a2a" opacity="0.7" font-weight="500">مانتو مینیمال</text>
-  <text x="400" y="970" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#2a2a2a" opacity="0.4">Women · Dress</text>
-</svg>

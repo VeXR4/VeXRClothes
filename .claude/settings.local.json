@@ -3,7 +3,10 @@
     "allow": [
       "Bash(npm run *)",
       "Bash(git commit -m 'Initial commit: VeXRClothes e-commerce project *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m 'Fix Cloudflare Pages deployment error *)",
+      "Bash(git push *)",
+      "WebFetch(domain:vexrclothes.vexrband.workers.dev)"
     ]
   }
 }

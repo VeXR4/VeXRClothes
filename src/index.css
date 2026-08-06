@@ -39,6 +39,11 @@
   --color-warning: #c08a3e;
   --color-error: #b04a3e;
 
+  /* CTA (Call-to-Action) - Luxury Navy */
+  --color-cta: #1e3a5f;
+  --color-cta-hover: #0f2744;
+  --color-cta-light: #2d5a87;
+
   /* Custom easing */
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
 

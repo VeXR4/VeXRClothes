@@ -116,7 +116,7 @@ export default function CartDrawer() {
                   setCartOpen(false);
                   navigate('/cart');
                 }}
-                className="mt-4 w-full bg-ink-900 py-3 text-sm font-medium text-cream hover:bg-ink-800"
+                className="mt-4 w-full bg-cta py-3 text-sm font-medium text-cream hover:bg-cta-hover transition-colors duration-300"
               >
                 مشاهده سبد و تسویه
               </button>

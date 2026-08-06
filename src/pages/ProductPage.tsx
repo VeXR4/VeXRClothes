@@ -193,9 +193,16 @@ export default function ProductPage({ slug }: Props) {
                   <Plus size={15} strokeWidth={2} />
                 </button>
               </div>
-              <Button onClick={handleAdd} className="flex-1">
+              <button
+                onClick={handleAdd}
+                className={`flex flex-1 items-center justify-center gap-2 px-7 py-3 text-sm font-medium tracking-wide transition-all duration-300 active:scale-[0.98] ${
+                  added
+                    ? 'bg-success text-cream'
+                    : 'bg-cta text-cream hover:bg-cta-hover shadow-sm'
+                }`}
+              >
                 {added ? <><Check size={16} strokeWidth={2} /> افزوده شد</> : <><ShoppingBag size={16} strokeWidth={1.5} /> افزودن به سبد</>}
-              </Button>
+              </button>
               <button
                 onClick={() => toggleWishlist(product.id)}
                 className="flex h-11 w-11 items-center justify-center rounded-sm border border-ink-900/15 text-ink-700 hover:text-error"

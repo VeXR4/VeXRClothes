@@ -19,9 +19,9 @@ export default function Button({
 
   const styles: Record<Variant, string> = {
     primary:
-      'bg-ink-900 text-cream hover:bg-ink-800 active:scale-[0.98] shadow-sm',
+      'bg-cta text-cream hover:bg-cta-hover active:scale-[0.98] shadow-sm',
     outline:
-      'border border-ink-900/20 text-ink-900 hover:border-ink-900 hover:bg-ink-900 hover:text-cream',
+      'border border-cta/30 text-cta hover:border-cta hover:bg-cta hover:text-cream',
     ghost: 'text-ink-700 hover:text-ink-900 hover:bg-ink-900/5',
   };
 

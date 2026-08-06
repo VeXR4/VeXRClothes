@@ -15,6 +15,7 @@ import CategoryPage from '@/pages/CategoryPage';
 import SearchPage from '@/pages/SearchPage';
 import WishlistPage from '@/pages/WishlistPage';
 import ComparePage from '@/pages/ComparePage';
+import AboutPage from '@/pages/AboutPage';
 
 function Router() {
   const route = useRoute();
@@ -37,6 +38,7 @@ function Router() {
   else if (path === '/wishlist') page = <WishlistPage />;
   else if (path === '/compare') page = <ComparePage />;
   else if (path === '/search') page = <SearchPage query={query.get('q') || ''} />;
+  else if (path === '/about') page = <AboutPage />;
   else if (path === '/magazine') page = <HomePage />;
   else page = <NotFound />;
 

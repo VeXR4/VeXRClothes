@@ -26,11 +26,11 @@ const footerNav = [
   {
     title: 'وکس آر',
     links: [
-      { label: 'درباره ما', path: '/' },
+      { label: 'درباره ما', path: '/about' },
       { label: 'مجله', path: '/magazine' },
-      { label: 'تماس با ما', path: '/' },
-      { label: 'فرصت‌های شغلی', path: '/' },
-      { label: 'قوانین', path: '/' },
+      { label: 'تماس با ما', path: '/about' },
+      { label: 'فرصت‌های شغلی', path: '/about' },
+      { label: 'قوانین', path: '/about' },
     ],
   },
 ];

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <rect width="800" height="1000" fill="#FAF9F6"/>
+  
+      <path d="M180 560 Q160 520 220 500 L520 480 Q620 480 640 540 L640 620 L180 620 Z" fill="#141414" opacity="0.92"/>
+      <path d="M180 560 Q160 520 220 500 L260 495 L260 560 Z" fill="#666666" opacity="0.7"/>
+      <ellipse cx="410" cy="620" rx="240" ry="20" fill="#000" opacity="0.06"/>
+    
+  <text x="400" y="940" text-anchor="middle" font-family="serif" font-size="28" fill="#141414" opacity="0.7" font-weight="500">کفش چرم مشکی</text>
+  <text x="400" y="970" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#141414" opacity="0.4">Shoes · Leather</text>
+</svg>

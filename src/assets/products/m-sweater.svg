@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <rect width="800" height="1000" fill="#FAF9F6"/>
+  
+      <path d="M300 300 L240 360 L200 520 L240 540 L260 460 L260 760 L540 760 L540 460 L560 540 L600 520 L560 360 L500 300 L460 340 L400 360 L340 340 Z" fill="#4a4a4a" opacity="0.92"/>
+      <rect x="385" y="300" width="30" height="60" rx="14" fill="#C8A97E" opacity="0.85"/>
+    
+  <text x="400" y="940" text-anchor="middle" font-family="serif" font-size="28" fill="#4a4a4a" opacity="0.7" font-weight="500">سویشرت نرم</text>
+  <text x="400" y="970" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#4a4a4a" opacity="0.4">Men · Sweater</text>
+</svg>

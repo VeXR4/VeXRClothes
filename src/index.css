@@ -1,0 +1,125 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Display + body fonts */
+  --font-display: 'Cormorant Garamond', 'Vazirmatn', serif;
+  --font-sans: 'Vazirmatn', 'Cormorant Garamond', system-ui, sans-serif;
+
+  /* Charcoal / ink ramp (primary) */
+  --color-ink-50: #f7f7f7;
+  --color-ink-100: #e3e3e3;
+  --color-ink-200: #c8c8c8;
+  --color-ink-300: #a4a4a4;
+  --color-ink-400: #818181;
+  --color-ink-500: #666666;
+  --color-ink-600: #4d4d4d;
+  --color-ink-700: #333333;
+  --color-ink-800: #1f1f1f;
+  --color-ink-900: #141414;
+  --color-ink-950: #0a0a0a;
+
+  /* Sand / beige accent ramp */
+  --color-sand-50: #faf6f0;
+  --color-sand-100: #f3e9da;
+  --color-sand-200: #e7d3b8;
+  --color-sand-300: #d9bd96;
+  --color-sand-400: #c8a97e;
+  --color-sand-500: #b8915f;
+  --color-sand-600: #9c7849;
+  --color-sand-700: #7a5d38;
+  --color-sand-800: #5e4729;
+  --color-sand-900: #4a3720;
+
+  /* Warm neutral (background) ramp */
+  --color-cream: #f5f3ee;
+  --color-cream-dark: #ece9e2;
+
+  /* Status colors */
+  --color-success: #4f7d52;
+  --color-warning: #c08a3e;
+  --color-error: #b04a3e;
+
+  /* Custom easing */
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Animations */
+  --animate-fade-up: fade-up 0.8s var(--ease-soft) both;
+  --animate-fade-in: fade-in 0.6s var(--ease-soft) both;
+  --animate-marquee: marquee 32s linear infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink-900);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-ink-900);
+    color: var(--color-cream);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+    opacity 0.8s var(--ease-soft),
+    transform 0.8s var(--ease-soft);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Hide scrollbar for horizontal scroll rows */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

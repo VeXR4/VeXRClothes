@@ -12,11 +12,11 @@ export default function Logo({ className = '', variant = 'dark', showPersian = t
   return (
     <span className={`inline-flex items-center gap-2.5 leading-none ${color} ${className}`}>
       <img
-        src="/assets/logo.svg"
+        src="/LogoBrand.webp"
         alt="لوگوی وکس آر"
         width={size}
         height={size}
-        className="shrink-0 drop-shadow-sm"
+        className="shrink-0 rounded-full object-cover"
         style={{ width: size, height: size }}
       />
       <span className="flex flex-col leading-none">

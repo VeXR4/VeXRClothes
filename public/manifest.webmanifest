@@ -10,9 +10,9 @@
   "dir": "rtl",
   "icons": [
     {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/LogoBrand.webp",
+      "sizes": "1024x1024",
+      "type": "image/webp",
       "purpose": "any"
     }
   ]

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowRight, Check, Heart, Minus, Plus, Ruler, ShoppingBag } from 'lucide-react';
+import { ArrowRight, Check, GitCompare, Heart, Minus, Plus, Ruler, ShoppingBag } from 'lucide-react';
 import Button from '@/components/Button';
 import ProductCard from '@/components/ProductCard';
 import { fetchProductBySlug, fetchProductsByIds } from '@/lib/api';
@@ -12,7 +12,7 @@ import type { Product } from '@/lib/types';
 type Props = { slug: string };
 
 export default function ProductPage({ slug }: Props) {
-  const { addToCart, toggleWishlist, isWishlisted } = useStore();
+  const { addToCart, toggleWishlist, isWishlisted, toggleCompare, isComparing } = useStore();
   const [product, setProduct] = useState<Product | null>(null);
   const [related, setRelated] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -209,6 +209,17 @@ export default function ProductPage({ slug }: Props) {
                 aria-label="علاقه‌مندی"
               >
                 <Heart size={18} strokeWidth={1.5} fill={isWishlisted(product.id) ? 'currentColor' : 'none'} className={isWishlisted(product.id) ? 'text-error' : ''} />
+              </button>
+              <button
+                onClick={() => toggleCompare(product.id)}
+                className={`flex h-11 w-11 items-center justify-center rounded-sm border transition-colors ${
+                  isComparing(product.id)
+                    ? 'border-cta bg-cta text-cream'
+                    : 'border-ink-900/15 dark:border-night-700/40 text-ink-900 dark:text-night-200 hover:border-cta hover:text-cta'
+                }`}
+                aria-label={isComparing(product.id) ? 'حذف از مقایسه' : 'افزودن به مقایسه'}
+              >
+                <GitCompare size={18} strokeWidth={1.5} fill={isComparing(product.id) ? 'currentColor' : 'none'} />
               </button>
             </div>
 

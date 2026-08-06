@@ -1,4 +1,4 @@
-import { Eye, Heart } from 'lucide-react';
+import { Eye, GitCompare, Heart } from 'lucide-react';
 import type { Product } from '@/lib/types';
 import { formatPrice } from '@/lib/format';
 import { img } from '@/lib/images';
@@ -11,7 +11,7 @@ type ProductCardProps = {
 };
 
 export default function ProductCard({ product, priority = false }: ProductCardProps) {
-  const { toggleWishlist, isWishlisted } = useStore();
+  const { toggleWishlist, isWishlisted, toggleCompare, isComparing } = useStore();
   const discount = product.old_price
     ? Math.round(((product.old_price - product.price) / product.old_price) * 100)
     : 0;
@@ -69,6 +69,22 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
             fill={isWishlisted(product.id) ? 'currentColor' : 'none'}
             className={isWishlisted(product.id) ? 'text-error' : ''}
           />
+        </button>
+
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleCompare(product.id);
+          }}
+          className={`absolute right-3 bottom-3 flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-sm transition-colors ${
+            isComparing(product.id)
+              ? 'bg-cta text-cream'
+              : 'bg-cream/90 text-ink-700 hover:bg-cta hover:text-cream'
+          }`}
+          aria-label={isComparing(product.id) ? 'حذف از مقایسه' : 'افزودن به مقایسه'}
+          title={isComparing(product.id) ? 'حذف از مقایسه' : 'افزودن به مقایسه'}
+        >
+          <GitCompare size={16} strokeWidth={1.5} fill={isComparing(product.id) ? 'currentColor' : 'none'} />
         </button>
 
         <div className="absolute inset-x-0 bottom-0 hidden translate-y-full opacity-0 transition-all duration-500 ease-[var(--ease-soft)] group-hover:translate-y-0 group-hover:opacity-100 lg:block">

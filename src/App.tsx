@@ -26,6 +26,7 @@ const ContactPage = lazy(() => import('@/pages/ContactPage'));
 const GuidesPage = lazy(() => import('@/pages/GuidesPage'));
 const TermsPage = lazy(() => import('@/pages/TermsPage'));
 const PrivacyPage = lazy(() => import('@/pages/PrivacyPage'));
+const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
 
 function PageLoader() {
   return <SkeletonLoader />;
@@ -59,24 +60,12 @@ function Router() {
   else if (path === '/guide') page = <GuidesPage />;
   else if (path === '/terms') page = <TermsPage />;
   else if (path === '/privacy') page = <PrivacyPage />;
-  else page = <NotFound />;
+  else page = <NotFoundPage />;
 
   return (
     <main className="min-h-screen">
       <Suspense fallback={<PageLoader />}>{page}</Suspense>
     </main>
-  );
-}
-
-function NotFound() {
-  return (
-    <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 pt-20">
-      <p className="font-display text-3xl text-ink-900">۴۰۴</p>
-      <p className="text-sm text-ink-500">صفحه یافت نشد.</p>
-      <button onClick={() => navigate('/')} className="text-sm font-medium text-ink-900 underline underline-offset-4">
-        بازگشت به خانه
-      </button>
-    </div>
   );
 }
 

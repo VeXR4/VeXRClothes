@@ -1,0 +1,19 @@
+{
+  "name": "VeXRClothes | پوشاک وکس آر",
+  "short_name": "VeXRClothes",
+  "description": "فروشگاه آنلاین پوشاک زنانه، مردانه و کفش با طراحی مدرن و مینیمال",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f3ee",
+  "theme_color": "#1e3a5f",
+  "lang": "fa",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

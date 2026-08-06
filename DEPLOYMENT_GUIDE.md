@@ -13,13 +13,7 @@ Output: dist/ (91KB gzipped)
 
 ## فایل‌های ایجاد شده
 
-### 1. `_redirects` (Cloudflare Pages)
-```bash
-/*  /index.html  200
-```
-**هدف:** پشتیبانی از SPA routing در Cloudflare Pages
-
-### 2. `_headers` (Security & Caching)
+### 1. `_headers` (Security & Caching)
 ```bash
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
@@ -35,12 +29,12 @@ Output: dist/ (91KB gzipped)
 ```
 **هدف:** بهینه‌سازی caching و افزایش امنیت
 
-### 3. `sitemap.xml`
+### 2. `sitemap.xml`
 - شامل تمام صفحات اصلی سایت
 - Priority و Changefreq مناسب
 - آخرین تاریخ به‌روزرسانی: 2026-08-06
 
-### 4. `robots.txt`
+### 3. `robots.txt`
 ```bash
 User-agent: *
 Allow: /
@@ -54,17 +48,17 @@ Sitemap: https://vexrclothes.com/sitemap.xml
 ```
 **هدف:** جلوگیری از ایندکس صفحات خصوصی
 
-### 5. Structured Data (JSON-LD)
+### 4. Structured Data (JSON-LD)
 - **WebSite schema** با SearchAction
 - **Organization schema** با اطلاعات تماس
 - اضافه شده در `index.html`
 
-### 6. Canonical URL
+### 5. Canonical URL
 ```html
 <link rel="canonical" href="https://vexrclothes.com/" />
 ```
 
-### 7. Cache System (`src/lib/cache.ts`)
+### 6. Cache System (`src/lib/cache.ts`)
 - Simple in-memory cache برای Supabase queries
 - TTL: 5 دقیقه
 - کاهش درخواست‌های تکراری به دیتابیس
@@ -216,11 +210,12 @@ Cloudflare Pages автоматически:
 3. دوباره Deploy کنید
 
 ### مشکل: 404 در صفحات غیر از Home
-**دلیل:** فایل `_redirects` وجود ندارد یا اشتباه است
-**راه‌حل:** مطمئن شوید فایل `public/_redirects` با محتوای زیر وجود دارد:
-```
-/*  /index.html  200
-```
+**دلیل:** Cloudflare Pages SPA routing درست تنظیم نشده
+**راه‌حل:**
+1. فایل `public/_redirects` رو حذف کنید (Cloudflare Pages نیازی به اون نداره)
+2. Cloudflare Pages خودش SPA routing رو مدیریت می‌کنه
+3. در Cloudflare Dashboard > Pages > Settings > Build & deployments
+4. مطمئن شوید **Client-side routing** فعال است
 
 ### مشکل: کندی سایت
 **دلیل:** Cache کار نمی‌کند یا queries تکراری هستند
@@ -237,6 +232,16 @@ npm install
 npm run build
 # خطاها را بررسی و رفع کنید
 ```
+
+---
+
+## نکته مهم درباره Cloudflare Pages
+
+⚠️ **فایل `_redirects` برای Cloudflare Pages استفاده نکنید!**
+
+Cloudflare Pages خودش به صورت خودکار SPA routing رو مدیریت می‌کنه. کافیه در تنظیمات پروژه، **Client-side routing** رو فعال کنید.
+
+اگر فایل `_redirects` داشته باشید، ممکنه با خطای **"Infinite loop detected"** مواجه شوید.
 
 ---
 

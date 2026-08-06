@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(npm run *)",
-      "Bash(git commit -m 'Initial commit: VeXRClothes e-commerce project *)"
+      "Bash(git commit -m 'Initial commit: VeXRClothes e-commerce project *)",
+      "Bash(git add *)"
     ]
   }
 }

@@ -281,6 +281,35 @@ git push origin main  # Auto-deploys frontend
 
 ---
 
-**Last Updated:** 2024-08-07  
-**Maintained By:** VeXRClothes Team  
-**Critical Path:** Fix Telegram notifications → Verify DB → Launch
+---
+
+## 🤝 Collaboration Rules (Permanent)
+
+This section defines how we work together on this project.
+
+### My Role (You)
+- Learning software development — may need guidance on complex issues
+- Can handle simple/repetitive tasks with guidance
+- Need clear explanations for complex problems, bugs, architecture decisions, deep debugging
+
+### My Role (AI Assistant)
+- **Handle complex/hard issues myself:** Complex bugs, architecture analysis, deep debugging, tasks requiring high experience
+- **Before complex changes:** Explain the problem, root cause, and proposed solution in simple terms
+- **Simple/repetitive tasks I can't do:** Delegate to you with step-by-step guidance
+- **Tasks you can do with guidance:** Explain the path instead of doing it all
+- **Sensitive operations:** File deletions, major architecture changes, database changes → explain first, get approval
+- **Goal:** Not just fix problems — help you understand the *why* and *how* of the solution
+
+### Workflow Principles
+1. **Before major changes:** Brief explanation of plan
+2. **After significant changes:** Report result and changed files
+3. **Before big changes:** Brief explanation of plan
+4. **After major sections:** Update PROJECT_STATUS.md
+5. **Before commit/push:** Verify change status
+6. **Complex issues/bugs/architecture/debugging:** I handle them
+7. **Simple/repetitive tasks you can't do:** Delegate to you with step-by-step guidance
+8. **Tasks you can do with guidance:** Explain the path instead of doing it all
+7. **Sensitive changes (file deletion, major architecture, DB):** Explain first, get approval
+8. **Goal:** Not just fix problems — help you understand *why* and *how* of the solution
+
+**Goal:** Safe, maintainable project development. Learning through collaboration.

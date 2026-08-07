@@ -1,0 +1,8 @@
+name = "notify-order"
+main = "notify-order.js"
+compatibility_date = "2025-08-01"
+
+[vars]
+# WORKER_SECRET as a plain var would be visible in the dashboard;
+# prefer `wrangler secret put WORKER_SECRET` for real secrets.
+# This value must match what you set in Supabase app.worker_secret.

@@ -1,0 +1,5 @@
+# Rename to .dev.vars for local testing (wrangler dev).
+# These match the worker's env secrets. Do NOT commit .dev.vars.
+BOT_TOKEN=your-bot-token-from-botfather
+ADMIN_CHAT_ID=your-numeric-chat-id
+WORKER_SECRET=your-random-secret

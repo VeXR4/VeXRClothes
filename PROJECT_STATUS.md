@@ -147,57 +147,23 @@
 
 | # | Issue | Severity | Status |
 |---|-------|----------|--------|
-| 1 | **Telegram notifications not arriving** | 🔴 Critical | 🔴 Active |
-| 2 | **Database connection perceived as "not connected" (site loads too fast, no Supabase latency)** | 🔴 Critical | 🔴 Active - Under investigation |
+| 1 | **Telegram notifications not arriving** | 🔴 Critical | ✅ Fixed 2026-08-07 |
+| 2 | **Database connection appears disconnected (mock fallback, no env vars)** | 🔴 Critical | ✅ Fixed 2026-08-07 |
 | 3 | `set_config` in Supabase doesn't persist - fixed with `app_settings` table | ✅ Fixed | ✅ Deployed |
 | 4 | `set_config` in migration doesn't persist across sessions | ✅ Fixed with `app_settings` table | ✅ Deployed |
 
-### **Critical Issue 1: Telegram Notifications Not Arriving**
+### **✅ Fixed: Telegram Notifications Not Arriving (2026-08-07)**
 
-**Symptoms:**
-- Order placed successfully on site
-- No message arrives in Telegram admin chat
-- No error in Worker logs (or Worker not triggered)
+**Root Causes Found & Fixed:**
+1. **No `.env` file** — `isSupabaseConfigured` was `false`, so the frontend ran in mock mode and never inserted real orders → trigger never fired.
+2. **`pg_net` extension wasn't enabled** in the Supabase database → `net.http_post` didn't exist → trigger errored silently.
+3. **Webhook body type mismatch** — `net.http_post` requires `jsonb` body, but the trigger sent `text` (via `::text` cast). Removed the cast.
+4. **Trigger on `orders` fired before `order_items` were inserted** — messages had no product details. Moved trigger to `order_items` (dedup via `order_notifications` keeps one message per order).
+5. **Live site env vars missing** — Cloudflare Pages needed `VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY` in Build environment variables; redeploy required.
 
-**Suspected Causes:**
-1. **Supabase webhook not firing** - Trigger may not be executing
-2. **Worker not receiving webhook** - URL/secret mismatch
-3. **Worker failing silently** - Check Cloudflare Worker logs
-4. **Telegram API error** - Invalid token/chat_id
+**Message now includes:** product name, size, color (Persian name, hex→name map in Worker), quantity, product slug (code), unit price, total — in labeled, spaced blocks.
 
-### **Critical Issue 2: Database Connection Appears Disconnected**
-
-**User Observation:**
-- Site loads extremely fast (no Supabase latency felt)
-- Order confirmation appears instantly without delay
-- User perceives database as "not connected"
-
-**Analysis - Likely Root Cause:**
-The frontend uses **mock data fallback** when Supabase is not configured or fails:
-
-```typescript
-// src/lib/api.ts - Line 10-11, 32-35
-if (!isSupabaseConfigured || !supabase) return mockCategories;
-if (!isSupabaseConfigured || !supabase) {
-  let result = mockProducts.filter((p) => p.is_active);
-  // ... returns mock data
-}
-```
-
-**Root Cause:** `isSupabaseConfigured` checks only if env vars exist, not if connection actually works:
-```typescript
-// src/lib/supabase.ts
-const url = import.meta.env.VITE_SUPABASE_URL;
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-export const isSupabaseConfigured = Boolean(url && anonKey);
-```
-
-**Missing:** No actual connection health check - if env vars exist but Supabase is unreachable/wrong credentials, it silently falls back to mock data.
-
-**Immediate Fix Needed:**
-1. Add actual connection health check on app init
-2. Show connection status indicator in UI
-3. Fail fast with error instead of silent mock fallback
+**Note for next developer:** the working `.env` lives only on the dev machine (gitignored). Live site config lives in Cloudflare Pages build env vars.
 
 ---
 
@@ -214,30 +180,12 @@ export const isSupabaseConfigured = Boolean(url && anonKey);
 
 ## Next Steps (Priority Order)
 
-### 🔴 IMMEDIATE - Fix Telegram Notifications
-1. **Check Cloudflare Worker Logs**
-   - Dashboard → Workers → `notify-order` → Logs
-   - Look for: incoming requests, Telegram API responses, errors
-
-2. **Verify Supabase Trigger Fires**
-   - Check `order_notifications` table after test order
-   - If empty → trigger not firing
-
-3. **Debug Worker**
-   - Add console.log to Worker (redeploy)
-   - Check if webhook received, Telegram API response
-
-### 🔴 CRITICAL - Fix Silent Database Disconnection
-1. **Add connection health check** on app init (`src/lib/supabase.ts`)
-2. **Show connection status** in Header (`src/components/Header.tsx`)
-3. **Fail fast** instead of silent mock fallback (`src/lib/api.ts`)
-
-### 🟡 HIGH - Verify Database Connection
-- Confirm Supabase connection string in Cloudflare Pages env vars
-- Test query from frontend: `GET /rest/v1/products?select=count`
-- Check browser Network tab for Supabase requests
+### ✅ DONE - Telegram Notifications + Database Connection (2026-08-07)
+- Both critical issues fixed end-to-end, verified with a real order from the live site
+- See "Fixed" section above for root causes
 
 ### 🟢 MEDIUM - Polish & Enhance
+- [ ] Connection health check on app init (`src/lib/supabase.ts`) — optional hardening
 - [ ] Admin panel for order management
 - [ ] Real SMS integration (Kavenegar)
 - [ ] Email notifications (Resend/SendGrid)

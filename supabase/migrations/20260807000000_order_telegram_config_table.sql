@@ -39,6 +39,8 @@ SET search_path = public
 AS $$
 DECLARE
   worker_url text := get_app_setting('worker_url');
+  ord orders%ROWTYPE;
+  items jsonb;
 BEGIN
   -- Skip when the Worker URL is not configured (local/dev databases)
   IF worker_url IS NULL OR worker_url = '' THEN
@@ -46,9 +48,24 @@ BEGIN
   END IF;
 
   -- Deduplicate: only notify once per order
-  IF EXISTS (SELECT 1 FROM order_notifications WHERE order_id = NEW.id) THEN
+  IF EXISTS (SELECT 1 FROM order_notifications WHERE order_id = NEW.order_id) THEN
     RETURN NEW;
   END IF;
+
+  SELECT * INTO ord FROM orders WHERE id = NEW.order_id;
+
+  SELECT jsonb_agg(jsonb_build_object(
+    'product_name', oi.product_name,
+    'quantity', oi.quantity,
+    'price', oi.price,
+    'color', oi.color,
+    'size', oi.size,
+    'product_slug', p.slug
+  ) ORDER BY oi.created_at)
+  INTO items
+  FROM order_items oi
+  LEFT JOIN products p ON p.id = oi.product_id
+  WHERE oi.order_id = NEW.order_id;
 
   -- Fire-and-forget webhook; failures must never block the order insert
   PERFORM
@@ -59,28 +76,29 @@ BEGIN
         'Authorization', 'Bearer ' || coalesce(get_app_setting('worker_secret'), '')
       ),
       body := jsonb_build_object(
-        'order_id', NEW.id::text,
-        'status', NEW.status,
-        'items_total', NEW.items_total,
-        'shipping_cost', NEW.shipping_cost,
-        'discount_amount', NEW.discount_amount,
-        'grand_total', NEW.grand_total,
-        'discount_code', NEW.discount_code,
-        'customer_name', NEW.customer_name,
-        'customer_phone', NEW.customer_phone,
-        'customer_email', NEW.customer_email,
-        'shipping_address', NEW.shipping_address,
-        'shipping_city', NEW.shipping_city,
-        'shipping_postal_code', NEW.shipping_postal_code,
-        'notes', NEW.notes,
-        'payment_method', NEW.payment_method,
-        'payment_status', NEW.payment_status,
-        'created_at', NEW.created_at::text
-      )::text
+        'order_id', ord.id::text,
+        'status', ord.status,
+        'items_total', ord.items_total,
+        'shipping_cost', ord.shipping_cost,
+        'discount_amount', ord.discount_amount,
+        'grand_total', ord.grand_total,
+        'discount_code', ord.discount_code,
+        'customer_name', ord.customer_name,
+        'customer_phone', ord.customer_phone,
+        'customer_email', ord.customer_email,
+        'shipping_address', ord.shipping_address,
+        'shipping_city', ord.shipping_city,
+        'shipping_postal_code', ord.shipping_postal_code,
+        'notes', ord.notes,
+        'payment_method', ord.payment_method,
+        'payment_status', ord.payment_status,
+        'created_at', ord.created_at::text,
+        'items', coalesce(items, '[]'::jsonb)
+      )
     )
   ;
 
-  INSERT INTO order_notifications (order_id) VALUES (NEW.id);
+  INSERT INTO order_notifications (order_id) VALUES (NEW.order_id);
 
   RETURN NEW;
 END;

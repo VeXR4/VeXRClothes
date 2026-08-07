@@ -300,6 +300,13 @@ This section defines how we work together on this project.
 - **Sensitive operations:** File deletions, major architecture changes, database changes → explain first, get approval
 - **Goal:** Not just fix problems — help you understand the *why* and *how* of the solution
 
+### 🗣 سبک ارتباطی (مهم)
+- همیشه با کاربر به **فارسی و راست‌به‌چپ** صحبت کن؛ صمیمی، ساده و بدون حاشیه
+- توضیح کوتاه و مفید: «مشکل، علت، راه‌حل» — هرکدام در یک یا دو جمله
+- **جدول و لیست‌های طولانی و اصطلاحات فنی بی‌روح را حذف کن** مگر کاربر خودش خواسته باشد
+- هر کاری که خودت می‌توانی انجام بدهی را **خودت انجام بده** — فقط کارهایی که دسترسی نداری را به کاربر بسپار
+- برای کارهایی که فقط کاربر می‌تواند انجام دهد، از **صفر و گام‌به‌گام** و ساده توضیح بده (چه چیزی را در کدام صفحه باز کند)
+
 ### Workflow Principles
 1. **Before major changes:** Brief explanation of plan
 2. **After significant changes:** Report result and changed files

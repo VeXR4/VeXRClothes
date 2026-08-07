@@ -21,8 +21,31 @@ const TELEGRAM_API = 'https://api.telegram.org/bot';
 
 const formatter = new Intl.NumberFormat('fa-IR');
 
-/** Escape characters Telegram treats specially in MarkdownV2 and wrap in code() */
-const esc = (s) => String(s ?? '').replace(/[_*[\]()~`>#+\-=|{}.!\\]/g, '\\$&');
+/** Escape HTML entities (parse_mode is HTML, not MarkdownV2) */
+const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+/** Convert hex color codes to Persian color names */
+const HEX_COLOR_NAMES = {
+  '#141414': 'مشکی',
+  '#1a1a1a': 'مشکی',
+  '#1f1f1f': 'مشکی',
+  '#2a2a2a': 'مشکی',
+  '#2a3a4a': 'سرمه‌ای',
+  '#333333': 'خاکستری تیره',
+  '#3a3a3a': 'خاکستری',
+  '#3a2a1a': 'قهوه‌ای تیره',
+  '#4a4a4a': 'خاکستری',
+  '#666666': 'خاکستری روشن',
+  '#818181': 'نقره‌ای',
+  '#8a6a3e': 'قهوه‌ای',
+  '#b8915f': 'طوسی مسی',
+  '#c8a97e': 'بژ',
+  '#e7d3b8': 'کرم',
+  '#f0e8d8': 'کرم روشن',
+  '#f0ece4': 'سفید',
+  '#f3e9da': 'کرم',
+};
+const colorName = (c) => (c ? (HEX_COLOR_NAMES[String(c).toLowerCase()] || c) : '');
 
 function buildPayment(method, status) {
   const methods = { online: 'آنلاین', cod: 'در محل' };
@@ -36,6 +59,20 @@ function buildMessage(order) {
   const name = order.customer_name || '—';
   const phone = order.customer_phone ? `+98${String(order.customer_phone).replace(/^0/, '')}` : null;
 
+  const itemsBlocks = (Array.isArray(order.items) ? order.items : []).map((it, i) => {
+    const qty = it.quantity ?? 1;
+    const lines = [
+      `نام محصول: ${esc(it.product_name || '—')}`,
+      it.size ? `سایز: ${esc(String(it.size).toUpperCase())}` : null,
+      it.color ? `رنگ: ${esc(colorName(it.color))}` : null,
+      `تعداد: ${qty}`,
+      it.product_slug ? `کد محصول: <code>${esc(it.product_slug)}</code>` : null,
+      `قیمت واحد: ${currency(it.price)}`,
+      `جمع: ${currency(it.price * qty)}`,
+    ].filter(Boolean);
+    return (i > 0 ? '\n' : '') + lines.join('\n');
+  });
+
   const lines = [
     '\u{1F6CD}‍\u{1F9FA} سفارش جدید در وکس‌آر',
     '═══',
@@ -44,6 +81,8 @@ function buildMessage(order) {
     phone ? `📱 تماس: <a href="tel:${phone}">${esc(String(order.customer_phone))}</a>` : null,
     order.customer_email ? `✉ ایمیل: ${esc(order.customer_email)}` : null,
     '',
+    ...(itemsBlocks.length ? ['🛍 آیتم‌ها:', ...itemsBlocks, ''] : []),
+    '— مبالغ —',
     `🛒 جمع کالاها: ${currency(order.items_total)}`,
     `🚚 هزینه ارسال: ${order.shipping_cost > 0 ? currency(order.shipping_cost) : 'رایگان'}`,
     order.discount_amount > 0
@@ -51,11 +90,13 @@ function buildMessage(order) {
       : null,
     `💰 مبلغ نهایی: ${currency(order.grand_total)}`,
     '',
+    '— ارسال —',
     `📍 آدرس: ${esc(order.shipping_city || '—')}، ${esc(order.shipping_address || '—')}`,
     order.shipping_postal_code ? `📋 کد پستی: ${esc(order.shipping_postal_code)}` : null,
     order.notes ? `📝 توضیحات: ${esc(order.notes)}` : null,
     '',
-    `💳 پرداخت: ${esc(buildPayment(order.payment_method, order.payment_status))}`,
+    '— پرداخت —',
+    `💳 روش: ${esc(buildPayment(order.payment_method, order.payment_status))}`,
     `⏰ ثبت: ${esc(order.created_at ? new Date(order.created_at).toLocaleString('fa-IR', { hour12: false }) : '—')}`,
     order.id ? `🆔 کد سفارش: <code>${esc(order.id.slice(0, 8).toUpperCase())}</code>` : null,
   ].filter(Boolean);

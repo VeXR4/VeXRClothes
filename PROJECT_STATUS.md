@@ -148,11 +148,11 @@
 | # | Issue | Severity | Status |
 |---|-------|----------|--------|
 | 1 | **Telegram notifications not arriving** | 🔴 Critical | 🔴 Active |
-| 2 | Database connection perceived as "not connected" (site too fast) | 🟡 Medium | Under investigation |
+| 2 | **Database connection perceived as "not connected" (site loads too fast, no Supabase latency)** | 🔴 Critical | 🔴 Active - Under investigation |
 | 3 | `set_config` in Supabase doesn't persist - fixed with `app_settings` table | ✅ Fixed | ✅ Deployed |
 | 4 | `set_config` in migration doesn't persist across sessions | ✅ Fixed with `app_settings` table | ✅ Deployed |
 
-### **Critical Issue: Telegram Notifications Not Arriving**
+### **Critical Issue 1: Telegram Notifications Not Arriving**
 
 **Symptoms:**
 - Order placed successfully on site
@@ -164,6 +164,51 @@
 2. **Worker not receiving webhook** - URL/secret mismatch
 3. **Worker failing silently** - Check Cloudflare Worker logs
 4. **Telegram API error** - Invalid token/chat_id
+
+### **Critical Issue 2: Database Connection Appears Disconnected**
+
+**User Observation:**
+- Site loads extremely fast (no Supabase latency felt)
+- Order confirmation appears instantly without delay
+- User perceives database as "not connected"
+
+**Analysis - Likely Root Cause:**
+The frontend uses **mock data fallback** when Supabase is not configured or fails:
+
+```typescript
+// src/lib/api.ts - Line 10-11, 32-35
+if (!isSupabaseConfigured || !supabase) return mockCategories;
+if (!isSupabaseConfigured || !supabase) {
+  let result = mockProducts.filter((p) => p.is_active);
+  // ... returns mock data
+}
+```
+
+**Root Cause:** `isSupabaseConfigured` checks only if env vars exist, not if connection actually works:
+```typescript
+// src/lib/supabase.ts
+const url = import.meta.env.VITE_SUPABASE_URL;
+const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+export const isSupabaseConfigured = Boolean(url && anonKey);
+```
+
+**Missing:** No actual connection health check - if env vars exist but Supabase is unreachable/wrong credentials, it silently falls back to mock data.
+
+**Immediate Fix Needed:**
+1. Add actual connection health check on app init
+2. Show connection status indicator in UI
+3. Fail fast with error instead of silent mock fallback
+
+---
+
+## Current Bugs / Issues
+
+| # | Issue | Severity | Status |
+|---|-------|----------|--------|
+| 1 | **Telegram notifications not arriving** | 🔴 Critical | 🔴 Active |
+| 2 | **Database connection appears disconnected (silent mock fallback, no health check)** | 🔴 Critical | 🔴 Active - Under investigation |
+| 3 | `set_config` in Supabase doesn't persist - fixed with `app_settings` table | ✅ Fixed | ✅ Deployed |
+| 4 | `set_config` in migration doesn't persist across sessions | ✅ Fixed with `app_settings` table | ✅ Deployed |
 
 ---
 
@@ -182,8 +227,13 @@
    - Add console.log to Worker (redeploy)
    - Check if webhook received, Telegram API response
 
+### 🔴 CRITICAL - Fix Silent Database Disconnection
+1. **Add connection health check** on app init (`src/lib/supabase.ts`)
+2. **Show connection status** in Header (`src/components/Header.tsx`)
+3. **Fail fast** instead of silent mock fallback (`src/lib/api.ts`)
+
 ### 🟡 HIGH - Verify Database Connection
-- Confirm Supabase connection string in env
+- Confirm Supabase connection string in Cloudflare Pages env vars
 - Test query from frontend: `GET /rest/v1/products?select=count`
 - Check browser Network tab for Supabase requests
 

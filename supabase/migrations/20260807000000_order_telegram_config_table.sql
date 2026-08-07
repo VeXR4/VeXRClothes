@@ -22,13 +22,12 @@ REVOKE ALL ON app_settings FROM anon, authenticated;
 GRANT ALL ON app_settings TO service_role;
 
 -- 2) Helper reads that keep the trigger clean
-CREATE OR REPLACE FUNCTION get_app_setting(name text)
+CREATE OR REPLACE FUNCTION get_app_setting(setting_key text)
 RETURNS text
-LANGUAGE plpgsql
+LANGUAGE sql
 STABLE
-SET search_path = public
 AS $$
-  SELECT value FROM app_settings WHERE key = name LIMIT 1;
+  SELECT value FROM public.app_settings WHERE key = setting_key LIMIT 1;
 $$;
 
 -- 3) Rewrite the notification function to read from app_settings
